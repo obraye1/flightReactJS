@@ -1,12 +1,76 @@
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+  SignIn,
+  SignUp,
+  UserButton,
+} from '@clerk/clerk-react';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Hero from "./component/Hero";
 
+if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+  throw new Error('Missing Publishable Key');
+}
 
+const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+
+function PublicPage() {
+  return (
+    <>
+      <Hero  />
+    </>
+  );
+}
+
+function ProtectedPage() {
+  return (
+    <>
+      <h1>Protected page</h1>
+      <UserButton />
+    </>
+  );
+}
+
+function ClerkProviderWithRoutes() {
+  const navigate = useNavigate();
+
+  return (
+    <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
+      <Routes>
+        <Route path="/" element={<PublicPage />} />
+        <Route
+          path="/sign-in/*"
+          element={<SignIn routing="path" path="/sign-in" />}
+        />
+        <Route
+          path="/sign-up/*"
+          element={<SignUp routing="path" path="/sign-up" />}
+        />
+        <Route
+          path="/protected"
+          element={
+            <>
+              <SignedIn>
+                <ProtectedPage />
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        />
+      </Routes>
+    </ClerkProvider>
+  );
+}
 
 function App() {
   return (
-    <div className="">
-     <Hero />
-    </div>
+    <BrowserRouter>
+      <ClerkProviderWithRoutes />
+    </BrowserRouter>
   );
 }
 
