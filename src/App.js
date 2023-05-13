@@ -29,10 +29,8 @@ function PublicPage() {
 function ProtectedPage() {
   return (
     <>
-
-        <UserButton />
+      <UserButton />
       <DataTable />
-
     </>
   );
 }
@@ -52,8 +50,9 @@ function ClerkProviderWithRoutes() {
           path="/sign-up/*"
           element={<SignUp routing="path" path="/sign-up" />}
         />
-        <Route path="/arrival" element={<Arrival />} />
-        <Route path="/depart" element={<DataTable />} />
+          <Route path="arrival" element={<Arrival />} />
+          <Route path="depart" element={<DataTable />} />
+
         <Route
           path="/protected"
           element={

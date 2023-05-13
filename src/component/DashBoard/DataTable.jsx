@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const DataTable = () => {
   const [airData, setAirData] = useState([]);
@@ -41,15 +41,20 @@ const DataTable = () => {
       <input
         className="p-2 outline-none w-[50%] font-thin"
         id="airport-code"
+        placeholder="EDDT"
         type="text"
         value={airportCode}
         onChange={handleInputChange}
       />
       <div className="flex justify-between items-center mx-auto w-[1240px]">
-        <h1 className="text-4xl p-4 font-bold">Flight Details</h1>
+        <h1 className="text-4xl p-4 font-bold">Departure Flight Details</h1>
         <ul className="flex gap-2 items-center justify-center font-bold">
-          <li className="border px-3 py-2 bg-transparent cursor-pointer"><Link to='/'> Home </Link> </li>
-          <li className="border px-3 py-2 bg-transparent cursor-pointer"><Link to='arrival'>Arrivals</Link> </li>
+          <li className="border px-3 py-2 bg-transparent cursor-pointer">
+            <Link to="/"> Home </Link>{' '}
+          </li>
+          <li className="border px-3 py-2 bg-transparent cursor-pointer">
+            <a href="arrival">Arrivals</a>{' '}
+          </li>
         </ul>
       </div>
 
