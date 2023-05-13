@@ -12,7 +12,6 @@ import Hero from './component/Hero';
 import Arrival from './component/DashBoard/Arrival';
 import DataTable from './component/DashBoard/DataTable';
 
-
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key');
 }
@@ -22,8 +21,7 @@ const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 function PublicPage() {
   return (
     <>
-      <Hero  />
-    
+      <Hero />
     </>
   );
 }
@@ -31,11 +29,10 @@ function PublicPage() {
 function ProtectedPage() {
   return (
     <>
-      <h1>Protected page</h1>
-      <DataTable >
-      <UserButton />
 
-      </DataTable>
+        <UserButton />
+      <DataTable />
+
     </>
   );
 }
